@@ -18,8 +18,18 @@ const skillsCtrl = require('../controllers/skills')
 router.get('/', skillsCtrl.index);
 
 //get certain id
+router.get('show/:skill', skillsCtrl.show)
 
-router.get('/:name', skillsCtrl.show)
+// router.get('/:name', skillsCtrl.show)
+
+router.delete('/:skill', skillsCtrl.delete)
+
+//add todo page
+router.get('/new', skillsCtrl.new);
+
+
+//create todo page
+router.post('/', skillsCtrl.create)
 
 
 module.exports = router;

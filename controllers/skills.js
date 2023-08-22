@@ -1,4 +1,4 @@
-const skills = require('../models/skills')
+const Skills = require('../models/skills')
 
 // function index(req, res) {
 //     res.render('skills/index', {
@@ -8,16 +8,36 @@ const skills = require('../models/skills')
 
 function index(req, res) {
     res.render('index', {
-        title: 'Student Skills', skills: skills.getAll()
+        title: 'Student Skills', skills: Skills.getAll()
     })
 }
-function show (req,res) {
+function show(req,res) {
     res.render('skills/show', {
-        skill: skills.getOne(req.params.skill)
-    })
+        skill: Skills.getOne(req.params.skill)
+        }
+    )
 }
+function deleteSkill(req, res) {
+    Skills.delete(req.params.skill);
+    res.redirect('/');
 
+    
+  }
+  function newSkill(req, res) {
+    res.render('skills/new', {title: 'New'});
+  }
+
+  function create(req, res){
+    Skills.create(req.body)
+    console.log(req.body)
+
+    res.redirect('/')
+
+  }
 module.exports = {
     index,
-    show
+    show,
+    delete: deleteSkill,
+    new: newSkill,
+    create
 }
